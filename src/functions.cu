@@ -2426,7 +2426,7 @@ __global__ void calculateInu(cufftComplex *I_nu, float* I, float nu, float nu_0,
         nudiv = nu/nu_0;
 
         I_nu_0 = I[N*i+j];
-        alpha = I[M*N+N*i+j] * 100.0f;
+        alpha = I[M*N+N*i+j] * 0.001;
 
         nudiv_pow_alpha = powf(nudiv, alpha);
 
@@ -2448,7 +2448,7 @@ __global__ void DChi2_total_alpha(float *noise, float *dchi2_total, float *dchi2
         float nudiv = nu/nu_0;
 
         I_nu_0 = I[N*i+j];
-        alpha = I[N*M+N*i+j] * 100.0f;
+        alpha = I[N*M+N*i+j] * 0.001;
 
         dI_nu_0 = powf(nudiv, alpha);
         dalpha = I_nu_0 * dI_nu_0 * fg_scale * logf(nudiv);
@@ -2473,7 +2473,7 @@ __global__ void DChi2_total_I_nu_0(float *noise, float *dchi2_total, float *dchi
         float nudiv = nu/nu_0;
 
         I_nu_0 = I[N*i+j];
-        alpha = I[N*M+N*i+j] * 100.0f;
+        alpha = I[N*M+N*i+j] * 0.001;
 
         dI_nu_0 = powf(nudiv, alpha);
         //dalpha = I_nu_0 * dI_nu_0 * fg_scale * logf(nudiv);
