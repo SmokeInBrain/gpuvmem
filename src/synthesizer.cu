@@ -838,7 +838,7 @@ void MFS::run()
         printf("Saving final image to disk\n");
         if(IoOrderEnd == NULL) {
                 iohandler->IoPrintImage(image->getImage(), mod_in, "", out_image, "JY/PIXEL", iter, 0, fg_scale, M, N);
-                iohandler->IoPrintImage(image->getImage(), mod_in, "", "alpha.fits", "", iter, 1, 0.001, M, N);
+                iohandler->IoPrintImage(image->getImage(), mod_in, "", "alpha.fits", "", iter, 1, 1e8, M, N);
         }else{
                 (IoOrderEnd)(image->getImage(), iohandler);
         }
