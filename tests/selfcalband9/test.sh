@@ -7,7 +7,7 @@ function valid () {
   fi
 }
 
-test=$($1 -i $2/hd142_b9cont_self_tav.ms -o $2/residuals.ms -O $2/mod_out.fits -m $2/mod_in_0.fits -I $2/input.dat -p $2/mem/ -X 16 -Y 16 -V 256 --verbose -z 0.001 -Z 0.05,0.0 -t 500000000 -g 1 --print-images)
+test=$($1 -i $2/hd142_b9cont_self_tav.ms -o $2/residuals.ms -O $2/mod_out.fits -m $2/mod_in_0.fits -I $2/input.dat -p $2/mem/ -X 16 -Y 16 -V 256 --verbose -z 0.001,3.5 -Z 0.05,0.0 -t 500000000 -g 1 --print-images --print-errors)
 valid $test
 
 #Comment the following lines to see the results of the test

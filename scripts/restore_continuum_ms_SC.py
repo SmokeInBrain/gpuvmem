@@ -27,7 +27,7 @@ tclean(vis=residual_ms, imagename=residual_image, deconvolver='hogbom', niter=0,
        stokes=polarization, weighting='briggs', robust=robust, imsize=[pix_num, pix_num], cell=pix_size, datacolumn='DATA')
 
 exportfits(imagename=residual_image + ".image",
-           fitsimage=residual_image + ".image.fits")
+           fitsimage=residual_image + ".image.fits", overwrite=True, history=False)
 
 ia.open(infile=residual_image + ".image")
 rbeam = ia.restoringbeam()
@@ -62,7 +62,7 @@ ia.convolve2d(outfile="convolved_mod_out", axes=[
 ia.done()
 ia.close()
 
-exportfits(imagename="convolved_mod_out", fitsimage="convolved_mod_out.fits")
+exportfits(imagename="convolved_mod_out", fitsimage="convolved_mod_out.fits", overwrite=True, history=False)
 ia.open(infile="convolved_mod_out.fits")
 ia.setrestoringbeam(beam=rbeam)
 ia.done()
@@ -74,4 +74,4 @@ imagearr = ["convolved_mod_out.fits", residual_image + ".image.fits"]
 
 immath(imagename=imagearr, expr=" (IM0   + IM1) ", outfile=restored)
 
-exportfits(imagename=restored, fitsimage=restored + ".fits", overwrite=True)
+exportfits(imagename=restored, fitsimage=restored + ".fits", overwrite=True, history=False)

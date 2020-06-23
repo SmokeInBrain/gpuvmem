@@ -195,8 +195,7 @@ __host__ void print_help() {
         printf("    -e  --eta              Variable that controls the minimum image value (Default eta = -1.0)\n");
         printf("    -p  --path             MEM path to save FITS images. With last / included. (Example ./../mem/)\n");
         printf("    -f  --file             Output file where final objective function values are saved (Optional)\n");
-        printf("    -M  --multigpu         Number of GPUs to use multiGPU image synthesis (Default OFF => 0)\n");
-        printf("    -s  --select           If multigpu option is OFF, then select the GPU ID of the GPU you will work on. (Default = 0)\n");
+        printf("    -G  --gpus             Index of the GPU/s you are going to use separated by a comma\n");
         printf("    -t  --iterations       Number of iterations for optimization (Default = 500)\n");
         printf("    -g  --gridding         Use gridding to decrease the number of visibilities. This is done in CPU (Need to select the CPU threads that will grid the input visibilities)\n");
         printf("    -F  --nu_0             Reference frequency in Hz (if alpha is not zero)");
@@ -233,11 +232,10 @@ __host__ char *strip(const char *string, const char *chars)
 
 __host__ Vars getOptions(int argc, char **argv) {
         Vars variables;
-        variables.multigpu = "NULL";
+        variables.gpus = "0";
         variables.ofile = "NULL";
         variables.path = "mem/";
         variables.output_image = "mod_out.fits";
-        variables.select = 0;
         variables.initial_values = "NULL";
         variables.penalization_factors = "NULL";
         variables.blockSizeX = -1;
@@ -255,7 +253,7 @@ __host__ Vars getOptions(int argc, char **argv) {
 
 
         long next_op;
-        const char* const short_op = "hcwi:o:O:I:m:n:N:r:R:f:M:s:e:p:X:Y:V:t:g:z:T:F:Z:";
+        const char* const short_op = "hcwi:o:O:I:m:n:N:r:R:f:G:e:p:X:Y:V:t:g:z:T:F:Z:";
 
         const struct option long_op[] = { //Flag for help, copyright and warranty
                 {"help", 0, NULL, 'h' },
@@ -271,9 +269,8 @@ __host__ Vars getOptions(int argc, char **argv) {
                 {"savemodel-input", 0, &save_model_input, 1},
                 /* These options don’t set a flag. */
                 {"input", 1, NULL, 'i' }, {"output", 1, NULL, 'o'}, {"output-image", 1, NULL, 'O'},
-                {"threshold", 0, NULL, 'T'}, {"nu_0", 0, NULL, 'F'},
-                {"inputdat", 1, NULL, 'I'}, {"model_input", 1, NULL, 'm' }, {"noise", 0, NULL, 'n' },
-                {"multigpu", 0, NULL, 'M'}, {"select", 1, NULL, 's'},
+                {"threshold", 0, NULL, 'T'}, {"nu_0", 0, NULL, 'F'}, {"inputdat", 1, NULL, 'I'},
+                {"model_input", 1, NULL, 'm' }, {"noise", 0, NULL, 'n' }, {"gpus", 0, NULL, 'G'},
                 {"path", 1, NULL, 'p'}, {"robust-parameter", 0, NULL, 'R'}, {"eta", 0, NULL, 'e'},
                 {"blockSizeX", 1, NULL, 'X'}, {"blockSizeY", 1, NULL, 'Y'}, {"blockSizeV", 1, NULL, 'V'},
                 {"iterations", 0, NULL, 't'}, {"noise-cut", 0, NULL, 'N' }, {"initial_values", 1, NULL, 'z'}, {"penalizators", 0, NULL, 'Z'},
@@ -351,8 +348,8 @@ __host__ Vars getOptions(int argc, char **argv) {
                         variables.path = (char*) malloc((strlen(optarg)+1)*sizeof(char));
                         strcpy(variables.path, optarg);
                         break;
-                case 'M':
-                        variables.multigpu = optarg;
+                case 'G':
+                        variables.gpus = optarg;
                         break;
                 case 'r':
                         variables.randoms = atof(optarg);
@@ -363,9 +360,6 @@ __host__ Vars getOptions(int argc, char **argv) {
                 case 'f':
                         variables.ofile = (char*) malloc((strlen(optarg)+1)*sizeof(char));
                         strcpy(variables.ofile, optarg);
-                        break;
-                case 's':
-                        variables.select = atoi(optarg);
                         break;
                 case 'X':
                         variables.blockSizeX = atoi(optarg);
@@ -423,10 +417,6 @@ __host__ Vars getOptions(int argc, char **argv) {
                 exit(EXIT_FAILURE);
         }
 
-        if(strcmp(variables.multigpu,"NULL")!=0 && variables.select != 0) {
-                print_help();
-                exit(EXIT_FAILURE);
-        }
         return variables;
 }
 

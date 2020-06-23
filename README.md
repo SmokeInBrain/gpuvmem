@@ -131,8 +131,7 @@ Example: `./bin/gpuvmem options [ arguments ...]`
     -e  --eta              Variable that controls the minimum image value (Default eta = -1.0)
     -p  --path             MEM path to save FITS images. With last / included. (Example ./../mem/)
     -f  --file             Output file where final objective function values are saved (Optional)
-    -M  --multigpu         Number of GPUs to use multiGPU image synthesis (Default OFF => 0)
-    -s  --select           If multigpu option is OFF, then select the GPU ID of the GPU you will work on. (Default = 0)
+    -G  --gpus             Index of the GPU/s you are going to use separated by a comma
     -t  --iterations       Number of iterations for optimization (Default = 500)
     -g  --gridding         Use count in cell gridding to decrease the number of visibilities. This is done in CPU (Need to select the CPU threads that will grid the input visibilities)
     -F  --nu_0             Reference frequency in Hz (if alpha is not zero)

@@ -7,7 +7,7 @@ class LBFGS : public Optimizator
 public:
 __host__ void allocateMemoryGpu();
 __host__ void deallocateMemoryGpu();
-__host__ void minimizate();
+__host__ void optimize();
 __host__ void LBFGS_recursion(float *d_y, float *d_s, float *xi, int par_M, int lbfgs_it, int M, int N);
 private:
 float ftol = 0;

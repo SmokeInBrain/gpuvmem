@@ -82,7 +82,7 @@ __host__ void LBFGS::deallocateMemoryGpu()
         FREEALL
 };
 
-__host__ void LBFGS::minimizate()
+__host__ void LBFGS::optimize()
 {
         printf("\n\nStarting Lbfgs\n\n");
         double start, end;

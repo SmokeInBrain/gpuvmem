@@ -7,7 +7,7 @@ function valid () {
   fi
 }
 
-test=$($1 -s 0 -i $2/SR1_M87_2017_101_hi_hops_netcal_StokesI.selfcal.LLRR.ms -o $2/residuals.ms -O $2/mod_out.fits -m $2/mod_in_0.fits -I $2/input.dat -p $2/mem/ -X 16 -Y 16 -V 256 --verbose --print-images -z 0.001 -Z 5e-6,5e-5 -t 500000000)
+test=$($1 -i $2/SR1_M87_2017_101_hi_hops_netcal_StokesI.selfcal.LLRR.ms -o $2/residuals.ms -O $2/mod_out.fits -m $2/mod_in_0.fits -I $2/input.dat -p $2/mem/ -X 16 -Y 16 -V 256 --verbose --print-images -z 0.001 -Z 5e-6,5e-5 -t 500000000)
 valid $test
 
 #Comment the following lines to see the results of the test

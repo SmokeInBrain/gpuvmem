@@ -9,7 +9,7 @@ class ConjugateGradient : public Optimizator
 public:
 __host__ void allocateMemoryGpu();
 __host__ void deallocateMemoryGpu();
-__host__ void minimizate();
+__host__ void optimize();
 private:
 float ftol = 0;
 float fret = 0;

@@ -77,7 +77,7 @@ __host__ void ConjugateGradient::deallocateMemoryGpu()
         FREEALL
 };
 
-__host__ void ConjugateGradient::minimizate()
+__host__ void ConjugateGradient::optimize()
 {
         printf("\n\nStarting Fletcher Reeves Polak Ribiere method (Conj. Grad.)\n\n");
         double start, end;
