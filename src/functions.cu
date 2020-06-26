@@ -1739,7 +1739,7 @@ __device__ float calculateL1norm(float *I, float noise, float noise_cut, int ind
         float l1 = 0.0f;
 
         if(noise <= noise_cut) {
-                l1 = normf(1, &c);
+                l1 = fabsf(c);
         }
 
         return l1;
