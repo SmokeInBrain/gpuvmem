@@ -14,7 +14,7 @@ int main(int argc, char **argv){
                 printf("Min Compute Capability of %2.1f required:  %d.%d found\n Not Building CUDA Code", min_cc, dP.major, dP.minor);
                 return 1; /* Failure */
         } else {
-                printf("-gencode arch=compute_%d%d,code=sm_%d%d", dP.major, dP.minor, dP.major, dP.minor);
+                printf("%d%d", dP.major, dP.minor);
                 return 0; /* Success */
         }
 }

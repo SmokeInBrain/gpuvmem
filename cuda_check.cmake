@@ -18,7 +18,7 @@ if (CUDA_FOUND)
   endif()
 
   if (${CUDA_SUCCESS})
-    message(STATUS "CUDA Architecture: ${ARCH}")
+    message(STATUS "CUDA Architecture: sm_${ARCH}")
     message(STATUS "CUDA Version: ${CUDA_VERSION_STRING}")
     message(STATUS "CUDA Path: ${CUDA_TOOLKIT_ROOT_DIR}")
     message(STATUS "CUDA Libraries: ${CUDA_LIBRARIES}")
